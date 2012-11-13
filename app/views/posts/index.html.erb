@@ -22,7 +22,7 @@
         <td><%= link_to post.id, post_path(post) %></td>
         <td><%= post.title %></td>
         <td><%= raw post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %></td>
-        <td><%= post.content %></td>
+        <td><%= raw post.content %></td>
         <td><%= post.image %></td>
         <td><%= post.author %></td>
         <td><%=l post.created_at %></td>
