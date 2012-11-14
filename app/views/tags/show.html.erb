@@ -1,21 +1,101 @@
-<%- model_class = Tag -%>
+<%- model_class = Post -%>
+<div class="span9">
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:tag_list) %></th>
+      <th><%= model_class.human_attribute_name(:content) %></th>
+      <th><%= model_class.human_attribute_name(:image) %></th>
+      <th><%= model_class.human_attribute_name(:author) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= link_to post.id, post_path(post) %></td>
+        <td><%= post.title %></td>
+        <td>
+          <% post.tags.each do |tag| %>
+            <%= link_to tag.name, tag %>
+            <% if post.tags.last.name == tag.name %>
+            <% else %>
+              &nbsp;,&nbsp;
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= raw post.content %></td>
+        <td><%= post.image %></td>
+        <td><%= post.author %></td>
+        <td><%=l post.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_post_path(post), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      post_path(post),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_post_path,
+            :class => 'btn btn-primary' %>
+
+
+
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @tag.name %></dd>
-</dl>
 
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              tags_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_tag_path(@tag), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              tag_path(@tag),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
+        <div class="span3">
+          
+          <div class="tabbable">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#categories" data-toggle="tab">Categories</a></li>
+              <li><a href="#archive" data-toggle="tab">Archive</a></li>
+            </ul>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane active" id="categories">
+              <div class="categories">
+                <% if Tag.all.size >= 1 %>
+                  <ul class="nav nav-list">
+                    <li class="nav-header"></li>
+                    
+                      <% if @currentTag.nil? %>
+                        <li class="active"><%= link_to "All" + " ( #{Post.all.size} )", posts_path %></a></li>
+                      <% else %>
+                        <li><%= link_to "All" + " ( #{Post.all.size} )", posts_path %></a></li>
+                      <% end %>
+                      
+                    
+                    <% Tag.all.each do |tag| %>
+                      <% @structure = tag.name + " ( #{tag.posts.size } )" %>
+                      <% if @currentTag.name == tag.name %>
+                        <li class="active"><a href="#"><%= link_to @structure, tag %></a></li>
+                      <% else %>
+                        <li><a href="#"><%= link_to @structure, tag %></a></li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                <% else %>
+                  <div class="alert alert-error">
+                    No Categoried defined!!
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="tab-pane" id="archive">
+            </div>
+          </div>
+        </div>

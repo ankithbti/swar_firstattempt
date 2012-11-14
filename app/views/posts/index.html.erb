@@ -21,7 +21,15 @@
       <tr>
         <td><%= link_to post.id, post_path(post) %></td>
         <td><%= post.title %></td>
-        <td><%= raw post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %></td>
+        <td>
+          <% post.tags.each do |tag| %>
+            <%= link_to tag.name, tag %>
+            <% if post.tags.last.name == tag.name %>
+            <% else %>
+              &nbsp;,&nbsp;
+            <% end %>
+          <% end %>
+        </td>
         <td><%= raw post.content %></td>
         <td><%= post.image %></td>
         <td><%= post.author %></td>
@@ -60,7 +68,7 @@
           <div class="tab-content">
             <div class="tab-pane active" id="categories">
               <div class="categories">
-                <% if Tag.all.size > 1 %>
+                <% if Tag.all.size >= 1 %>
                   <ul class="nav nav-list">
                     <li class="nav-header"></li>
                     
@@ -74,9 +82,9 @@
                     <% Tag.all.each do |tag| %>
                       <% @structure = tag.name + " ( #{tag.posts.size } )" %>
                       <% if @currentTag == tag.name %>
-                        <li class="active"><a href="#"><%= link_to @structure, tag_path(tag.name) %></a></li>
+                        <li class="active"><a href="#"><%= link_to @structure, tag %></a></li>
                       <% else %>
-                        <li><a href="#"><%= link_to @structure, tag_path(tag.name) %></a></li>
+                        <li><a href="#"><%= link_to @structure, tag %></a></li>
                       <% end %>
                     <% end %>
                   </ul>

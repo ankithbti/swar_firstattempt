@@ -8,12 +8,15 @@ class PostsController < ApplicationController
       @post_hash_by_year = @posts.group_by{|x| x.created_at.year }
       @post_hash_by_month = @post_hash_by_year.map{|k,v| [k,v.group_by{|x| x.created_at.month}]}
       # raise @post_hash_by_month.to_yaml   
-    elsif params[:tag] === /^\d+$/
+    elsif params[:tag] == /^\d+$/
       @posts = Post.all
+      raise "Int " + @posts.to_yaml
     else
       @posts = Post.tagged_with(params[:tag])
       @currentTag = params[:tag]
+      raise "String " + @posts.to_yaml
     end
+
 
     respond_to do |format|
       format.html # index.html.erb
