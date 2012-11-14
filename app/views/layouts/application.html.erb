@@ -7,9 +7,16 @@
 	<%= csrf_meta_tags %>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= favicon_link_tag 'favicon.ico' %>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  
+  <!-- For Google +1 button -->
+  <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
+
+
 </head>
 <body>
-
 	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -18,7 +25,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="<%= root_url %>">Swar</a>
+          <a class="brand" href='<%= "#{root_url}" %>'>Swar</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="#">About</a></li>
@@ -62,6 +69,26 @@
         <%= yield %>
       </div>
     </div>
+
+    <!-- Social Plugins data -->
+    <!-- facebook -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=417548224967075";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- twitter -->
+    <script id="deferedjs" type="text/javascript">
+    var b = document.createElement('script');
+    b.type = 'text/javascript';
+    b.src = ('http://platform.twitter.com/widgets.js');
+    var a=document.getElementById("deferedjs");
+    a.parentNode.insertBefore(b,a);
+    </script>
 
 </body>
 </html>

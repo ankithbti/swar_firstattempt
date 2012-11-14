@@ -1,8 +1,17 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import url(http://fonts.googleapis.com/css?family=Dancing+Script);
+@import url(http://fonts.googleapis.com/css?family=Josefin+Sans);
+
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif);
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+
+@import url(http://fonts.googleapis.com/css?family=Corben:bold);
+@import url(http://fonts.googleapis.com/css?family=Nobile);
+
 #categories{
-	font-family: Marcellus, "Droid Serif";
+	font-family: "Droid Sans" ;
 	padding:0px;
 	/*-moz-box-shadow:    inset 0 0 10px #000000;
    -webkit-box-shadow: inset 0 0 10px #000000;
@@ -10,4 +19,91 @@
    -webkit-box-shadow: 0 8px 6px -6px #3A87AD;
 	   -moz-box-shadow: 0 8px 6px -6px #3A87AD;
 	        box-shadow: 0 8px 6px -6px #3A87AD;
+}
+
+.swartabs ul li a {
+	font-family: "Droid Sans" ;
+}
+
+.swartabcontent{
+	font-family: "Droid Sans" ;
+	
+	margin-bottom: 20px;
+	padding-bottom:20px;
+}
+
+
+.smallpost {
+	width:90%;
+	background-color: #f9f9f9;
+	border-bottom-color: #0288AD;
+	border-bottom-width: 10px;
+	border-bottom-style: solid;
+	min-height:100px;
+	padding:20px;
+	font-family: "Josefin Sans" ;
+	margin-bottom: 10px;
+}
+.smallpost:hover {
+	background-color: #f1f1f1;
+}
+
+.smallpost img{
+display: block;
+width: 150px;
+height: 150px;
+float: left;
+position: relative;
+}
+
+.smallpost .details{
+float: left;
+width: 60%;
+margin-left: 20px;
+margin-right: 10px;
+}
+
+.smallpost .title{
+	font-family: "Droid Serif" ;
+	font-size: 2em;
+	font-weight: normal;
+	line-height: 1.333em;
+	color: #763A7A ;
+	text-align: justify;
+}
+
+.smallpost .metadata{
+	font-family: "Josefin Sans" ;
+	font-size: 1.5em;
+	font-weight: normal;
+	line-height: 1em;
+	text-align: left;
+	margin-top:5px;
+	margin-bottom: 5px;
+	background-color: #f1684e ;
+	color: #000;
+	padding: 5px;
+}
+
+.smallpost .description{
+	font-family: "Josefin Sans" ;
+	font-size: 1.5em;
+	font-weight: normal;
+	line-height: 1em;
+	text-align: justify;
+	margin-top:20px;
+	color: #f1684e;
+}
+
+.smallpost .social-media {
+border-left: 1px solid #EDEDED;
+float: left;
+display: block;
+margin-top: 2px;
+margin-bottom: 2px;
+position: relative;
+width: 110px;
+padding-top: 4px;
+padding-left: 10px;
+padding-right: 0;
 }

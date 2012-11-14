@@ -1,71 +1,45 @@
-<%- model_class = Post -%>
+
 <div class="span9">
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:tag_list) %></th>
-      <th><%= model_class.human_attribute_name(:content) %></th>
-      <th><%= model_class.human_attribute_name(:image) %></th>
-      <th><%= model_class.human_attribute_name(:author) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to post.id, post_path(post) %></td>
-        <td><%= post.title %></td>
-        <td>
-          <% post.tags.each do |tag| %>
-            <%= link_to tag.name, tag %>
-            <% if post.tags.last.name == tag.name %>
-            <% else %>
-              &nbsp;,&nbsp;
-            <% end %>
-          <% end %>
-        </td>
-        <td><%= raw post.content %></td>
-        <td><%= post.image %></td>
-        <td><%= post.author %></td>
-        <td><%=l post.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_post_path(post), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      post_path(post),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_post_path,
-            :class => 'btn btn-primary' %>
-
-
-
-</div>
+  <% @arr = [1,2,3,4,5,6,7,8,9,10] %>
+  <% @arr.each do |t| %>
+  <div class="smallpost">
+    <%= link_to image_tag(getImage "150/000&text=My Swar")%>
+    <div class="details">
+        <div class="title">
+          Test Title is a good thing
+        </div>
+        <div class="metadata">On Nov 10 2012 by Dummy User
+        </div>
+        <div class="description">
+          Test Title is a good thingTest Title is a good thingTest Title is a good thingTest Title is a good thingTest Title is a good thingTest Title is a good thingTest....
+        </div>
+    </div>
+    <div class="social-media group" style="margin-top:20px;">
+        <!--Twitter-->
+        <a href="http://localhost:3000" class="twitter-share-button" data-url="#" data-via="swar" data-related="swar" data-hashtags="swar">Tweet</a>
+                          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+                          </script>
+                          
+        <!--Facebook-->
+        <div class="fb-like" data-href="http://www.fitied.com" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+                          
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <% end %>
+  <div class="clearfix"></div>
+</div><!-- <div class="span9"> -->
 
 
         <div class="span3">
           
-          <div class="tabbable">
+          <div class="tabbable swartabs">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#categories" data-toggle="tab">Categories</a></li>
               <li><a href="#archive" data-toggle="tab">Archive</a></li>
             </ul>
           </div>
-          <div class="tab-content">
+          <div class="tab-content swartabcontent">
             <div class="tab-pane active" id="categories">
               <div class="categories">
                 <% if Tag.all.size >= 1 %>
@@ -98,4 +72,15 @@
             <div class="tab-pane" id="archive">
             </div>
           </div>
+
+              <a href="https://twitter.com/fitied" style="margin-bottom:10px;" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @fitied</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+              </script>
+
+              <div style="margin-top:10px;margin-bottom:20px;" class="fb-like-box" data-href="https://www.facebook.com/fitied" data-width="292" data-show-faces="true" data-stream="false"                  data-header="true"></div>
+              
+              <!-- Place this tag where you want the badge to render -->
+              <div style="margin-top:10px;margin-bottom:10px;" class="g-plus" data-href="https://plus.google.com/105996583569728579378?rel=publisher" data-width="292" data-height="131" data-theme="light"></div>
+
+
         </div>
