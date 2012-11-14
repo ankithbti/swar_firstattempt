@@ -2,22 +2,11 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    # raise params[:tag].to_yaml
-    if params[:tag].inspect
-      @posts = Post.all
-      @post_hash_by_year = @posts.group_by{|x| x.created_at.year }
-      @post_hash_by_month = @post_hash_by_year.map{|k,v| [k,v.group_by{|x| x.created_at.month}]}
-      # raise @post_hash_by_month.to_yaml   
-    elsif params[:tag] == /^\d+$/
-      @posts = Post.all
-      raise "Int " + @posts.to_yaml
-    else
-      @posts = Post.tagged_with(params[:tag])
-      @currentTag = params[:tag]
-      raise "String " + @posts.to_yaml
-    end
-
-
+    #   @post_hash_by_year = @posts.group_by{|x| x.created_at.year }
+    #   @post_hash_by_month = @post_hash_by_year.map{|k,v| [k,v.group_by{|x| x.created_at.month}]}
+    
+    @posts = Post.search(params[:search])
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
